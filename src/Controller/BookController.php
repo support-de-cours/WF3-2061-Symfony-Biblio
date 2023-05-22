@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/book', name: 'book:')]
 class BookController extends AbstractController
 {
-    #[Route('s', name: 'index')] // site.com/books
+    #[Route('s', name: 'index', methods: ["HEAD","GET"])] // site.com/books
     public function index(): Response
     {
         $books = [
@@ -32,7 +32,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('', name: 'create')] // site.com/book
+    #[Route('', name: 'create', methods: ["HEAD","GET","POST"])] // site.com/book
     public function create(Request $request): Response
     {
         // Check if user is granted
@@ -50,7 +50,10 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         // Form treatment + form validator + saving data
-        // ...
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            dd( $book );
+        }
 
         // Create the form view
         $form = $form->createView();
@@ -61,21 +64,21 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'read')] // site.com/book/42
+    #[Route('/{id}', name: 'read', methods: ["HEAD","GET"])] // site.com/book/42
     public function read(): Response
     {
         return $this->render('pages/book/read.html.twig', [
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'update')] // site.com/book/42/edit
+    #[Route('/{id}/edit', name: 'update', methods: ["HEAD","GET","POST"])] // site.com/book/42/edit
     public function update(): Response
     {
         return $this->render('pages/book/update.html.twig', [
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'delete')] // site.com/book/42/delete
+    #[Route('/{id}/delete', name: 'delete', methods: ["HEAD","GET","DELETE"])] // site.com/book/42/delete
     public function delete(): Response
     {
         return $this->render('pages/book/delete.html.twig', [
