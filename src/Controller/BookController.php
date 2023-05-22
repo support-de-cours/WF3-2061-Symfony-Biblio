@@ -13,7 +13,20 @@ class BookController extends AbstractController
     #[Route('s', name: 'index')] // site.com/books
     public function index(): Response
     {
+        $books = [
+            (object) [
+                'title' => "The First Book"
+            ],
+            (object) [
+                'title' => "The Second Book"
+            ],
+            (object) [
+                'title' => "The Third Book"
+            ],
+        ];
+
         return $this->render('pages/book/index.html.twig', [
+            'books' => $books
         ]);
     }
 

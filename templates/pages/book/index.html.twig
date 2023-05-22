@@ -1,7 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book Index!{% endblock %}
+{# Page settings #}
+{% set page_title = "All our books" %}
 
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
 {% block body %}
-Book Index
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+    <ul>
+    {% for book in books %}
+        <li>
+            {{ book.title }}
+        </li>
+    {% endfor %}
+    </ul>
+</main>
+
+<footer class="page-footer">
+    <a href="">Add a new book</a>
+</footer>
 {% endblock %}
