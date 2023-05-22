@@ -18,7 +18,7 @@
     <ul>
     {% for book in books %}
         <li>
-            {{ book.title }}
+            <a href="{{ url('book:read', {id: book.id}) }}">{{ book.title }}</a>
         </li>
     {% endfor %}
     </ul>
