@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/book', name: 'book:')]
 class BookController extends AbstractController
@@ -31,9 +33,31 @@ class BookController extends AbstractController
     }
 
     #[Route('', name: 'create')] // site.com/book
-    public function create(): Response
+    public function create(Request $request): Response
     {
+        // Check if user is granted
+        // ...
+
+        // Create the new Book object
+        $book = new Book;
+
+        // Build the form
+        // Creation du formulaire basé sur l'architecture BookType
+        // ET sur l'objet $book
+        $form = $this->createForm(BookType::class, $book);
+
+        // Handle the request
+        $form->handleRequest($request);
+
+        // Form treatment + form validator + saving data
+        // ...
+
+        // Create the form view
+        $form = $form->createView();
+
         return $this->render('pages/book/create.html.twig', [
+            // Binding the form
+            'form' => $form
         ]);
     }
 

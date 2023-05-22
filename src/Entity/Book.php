@@ -1,5 +1,7 @@
 <?php
 
+// L'entité définit la structure et les contraintes de la base de données
+
 namespace App\Entity;
 
 use App\Repository\BookRepository;
