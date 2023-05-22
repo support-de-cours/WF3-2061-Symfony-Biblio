@@ -14,15 +14,15 @@ class BookController extends AbstractController
     public function index(): Response
     {
         $books = [
-            (object) [
-                'title' => "The First Book"
-            ],
-            (object) [
-                'title' => "The Second Book"
-            ],
-            (object) [
-                'title' => "The Third Book"
-            ],
+            // (object) [
+            //     'title' => "The First Book"
+            // ],
+            // (object) [
+            //     'title' => "The Second Book"
+            // ],
+            // (object) [
+            //     'title' => "The Third Book"
+            // ],
         ];
 
         return $this->render('pages/book/index.html.twig', [

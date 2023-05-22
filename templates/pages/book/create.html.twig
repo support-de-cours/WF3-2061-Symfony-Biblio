@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book create!{% endblock %}
+{# Page settings #}
+{% set page_title = "Add a new book" %}
 
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
 {% block body %}
-Book create
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+    
+    FORM....
+    
+</main>
+
+<footer class="page-footer">
+    <a href="{{ url('book:index') }}" class="btn btn-link btn-sm">Back to books list</a>
+</footer>
 {% endblock %}
