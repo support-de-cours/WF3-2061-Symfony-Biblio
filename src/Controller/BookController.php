@@ -81,9 +81,10 @@ class BookController extends AbstractController
      * Methode dédié à l'affichage des données d'un livre
      */
     #[Route('/{id}', name: 'read', methods: ["HEAD","GET"])] // site.com/book/42
-    public function read(): Response
+    public function read(Book $book): Response
     {
         return $this->render('pages/book/read.html.twig', [
+            'book' => $book
         ]);
     }
 
