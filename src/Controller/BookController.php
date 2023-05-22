@@ -13,17 +13,33 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/book', name: 'book:')]
 class BookController extends AbstractController
 {
+    /**
+     * Methode dédiée à l'affichage de la liste des livres
+     *
+     * @param BookRepository $bookRepository
+     * @return Response
+     */
     #[Route('s', name: 'index', methods: ["HEAD","GET"])] // site.com/books
     public function index(BookRepository $bookRepository): Response
     {
         // TODO: Make a pagination
+        // Requete DQL de récup de la liste des livres en BDD
         $books = $bookRepository->findAll();
 
+        // Rendu de la page dédiée à l'affichage de la liste des livres
+        // en passant la variable $books contenant la liste des livres de la BDD
         return $this->render('pages/book/index.html.twig', [
             'books' => $books
         ]);
     }
 
+    /**
+     * Méthode dédiée à l'affichage et au traitement du formulaire de création d'un livre
+     *
+     * @param Request $request
+     * @param BookRepository $bookRepository
+     * @return Response
+     */
     #[Route('', name: 'create', methods: ["HEAD","GET","POST"])] // site.com/book
     public function create(Request $request, BookRepository $bookRepository): Response
     {
@@ -46,7 +62,10 @@ class BookController extends AbstractController
         {
             $bookRepository->save($book, true);
 
-            return $this->redirectToRoute('book:index');
+            // return $this->redirectToRoute('book:index');
+            return $this->redirectToRoute('book:read', [
+                'id' => $book->getId()
+            ]);
         }
 
         // Create the form view
@@ -58,6 +77,9 @@ class BookController extends AbstractController
         ]);
     }
 
+    /**
+     * Methode dédié à l'affichage des données d'un livre
+     */
     #[Route('/{id}', name: 'read', methods: ["HEAD","GET"])] // site.com/book/42
     public function read(): Response
     {
