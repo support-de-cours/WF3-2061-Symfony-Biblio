@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,19 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 class BookController extends AbstractController
 {
     #[Route('s', name: 'index', methods: ["HEAD","GET"])] // site.com/books
-    public function index(): Response
+    public function index(BookRepository $bookRepository): Response
     {
-        $books = [
-            // (object) [
-            //     'title' => "The First Book"
-            // ],
-            // (object) [
-            //     'title' => "The Second Book"
-            // ],
-            // (object) [
-            //     'title' => "The Third Book"
-            // ],
-        ];
+        // TODO: Make a pagination
+        $books = $bookRepository->findAll();
 
         return $this->render('pages/book/index.html.twig', [
             'books' => $books
@@ -33,7 +25,7 @@ class BookController extends AbstractController
     }
 
     #[Route('', name: 'create', methods: ["HEAD","GET","POST"])] // site.com/book
-    public function create(Request $request): Response
+    public function create(Request $request, BookRepository $bookRepository): Response
     {
         // Check if user is granted
         // ...
@@ -52,7 +44,9 @@ class BookController extends AbstractController
         // Form treatment + form validator + saving data
         if ($form->isSubmitted() && $form->isValid())
         {
-            dd( $book );
+            $bookRepository->save($book, true);
+
+            return $this->redirectToRoute('book:index');
         }
 
         // Create the form view
