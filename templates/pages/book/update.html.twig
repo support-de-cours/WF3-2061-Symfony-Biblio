@@ -20,8 +20,9 @@
         <div class="col-md-8 offset-md-2">
 
             {% include "pages/book/_form.html.twig" with {
+                form: form,
                 btn_label: "Update the book"
-            } %}
+            } only %}
 
         </div>
     </div>
