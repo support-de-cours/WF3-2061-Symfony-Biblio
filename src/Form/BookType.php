@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class BookType extends AbstractType
 {
@@ -33,6 +34,9 @@ class BookType extends AbstractType
 
                 // Make it required
                 'required' => true,
+
+                // Prevent => Expected argument of type "string", "null" given 
+                'empty_data' => "",
                 
                 // Field attributes
                 'attr' => [

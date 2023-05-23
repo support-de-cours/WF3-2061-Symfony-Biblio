@@ -84,3 +84,10 @@
 - Book          bin/console make:entity Book
 - Author        bin/console make:entity Author
 - User          bin/console make:xxxxxxxxxxxx
+
+
+Author
+--
+firstname
+lastname
+

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Form\AuthorType;
-use App\Form\AuthorUpdateType;
 use App\Repository\AuthorRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
