@@ -1,7 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}book update!{% endblock %}
+{# Page settings #}
+{% set page_title = "Update a book: " ~ book.title %}
 
+
+{# Page Title #}
+{% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
+
+
+{# Page Body #}
 {% block body %}
-book update
+<header class="page-header">
+    <h2 class="page-title">{{ page_title }}</h2>
+</header>
+
+<main class="page-content">
+    
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            {% include "pages/book/_form.html.twig" with {
+                btn_label: "Update the book"
+            } %}
+
+        </div>
+    </div>
+
+</main>
+
+<footer class="page-footer">
+    <a href="{{ url('book:index') }}" class="btn btn-link btn-sm">Back to books list</a>
+    <a href="{{ url('book:read', {id: book.id}) }}" class="btn btn-link btn-sm">Back to book details</a>
+</footer>
 {% endblock %}

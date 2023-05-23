@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\BookType;
+use App\Form\BookUpdateType;
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -89,9 +90,36 @@ class BookController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'update', methods: ["HEAD","GET","POST"])] // site.com/book/42/edit
-    public function update(): Response
+    public function update(Book $book, Request $request, BookRepository $bookRepository): Response
     {
+        // Check if user is granted
+        // ...
+
+        // Build the form
+        // Creation du formulaire basé sur l'architecture BookType
+        // ET sur l'objet $book
+        $form = $this->createForm(BookType::class, $book);
+
+        // Handle the request
+        $form->handleRequest($request);
+
+        // Form treatment + form validator + saving data
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $bookRepository->save($book, true);
+
+            // return $this->redirectToRoute('book:index');
+            return $this->redirectToRoute('book:read', [
+                'id' => $book->getId()
+            ]);
+        }
+
+        // Create the form view
+        $form = $form->createView();
+
         return $this->render('pages/book/update.html.twig', [
+            'book' => $book,
+            'form' => $form
         ]);
     }
 
