@@ -6,22 +6,6 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 
 
-        <style>
-            body {
-                min-height:100vh; /* 1 */
-                display:flex; /* 2 */
-                flex-direction:column; /* 3 */
-            }
-            .main-content {
-                flex-grow:1;
-            }
-
-            .nav-link.active {
-                color: rgb(190, 0, 0) !important;
-                text-decoration: underline;
-            }
-        </style>
-
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -35,6 +19,10 @@
 
         {# Layout Header #}
         {% include "layout/header.html.twig" %}
+
+
+        {# <div data-controller="hello">Plop</div> #}
+
 
         <div class="main-content">
             <div class="container">
