@@ -12,3 +12,6 @@ body {
     color: rgb(190, 0, 0) !important;
     text-decoration: underline;
 }
+button.red {
+    background-color: red;
+}

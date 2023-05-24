@@ -8,6 +8,12 @@
 {% block title %}{{ page_title }} - {{ parent() }}{% endblock %}
 
 
+{% block stylesheets %}
+{{ encore_entry_link_tags('app') }}
+{{ encore_entry_link_tags('author') }}
+{# {{parent()}} #}
+{% endblock %}
+
 {# Page Body #}
 {% block body %}
 <header class="page-header">
